@@ -33,9 +33,6 @@ public class ParentClass {
         wait.until(ExpectedConditions.elementToBeClickable(locater)).click();
     }
 
-    public void clickTo(WebElement element){
-        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-    }
 
     public void sendKeysTo(By locater, String text){
         wait.until(ExpectedConditions.visibilityOfElementLocated(locater)).clear();
@@ -59,44 +56,12 @@ public class ParentClass {
         }
     }
 
-    public boolean isExist(By locator){
-        return driver.findElements(locator).size()>0;
-    }
-
-    public void sleep(long milis){
-        try {
-            Thread.sleep(milis);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void scrollElement(WebElement element){
-        JavascriptExecutor js=(JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();",element);
-    }
 
     public void scrollLocator(By locator){
         JavascriptExecutor js=(JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();",driver.findElement(locator));
     }
 
-    public void verifyTextIn(By locator, String str){
-        WebElement warning = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        Assert.assertTrue(warning.getText().toLowerCase().contains(str.toLowerCase()));
-    }
-
-    public void clickTextInSelect(By locator, String text){
-        WebElement selectButton=driver.findElement(locator);
-        Select select =new Select(selectButton);
-        List<WebElement> list=select.getOptions();
-        for (WebElement element:list) {
-            if (element.getText().contains(text)){
-                element.click();
-                break;
-            }
-        }
-    }
 
     @AfterSuite
     public void afterSuite(){
